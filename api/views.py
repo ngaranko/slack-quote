@@ -13,11 +13,6 @@ class APIView(View):
     def dispatch(self, request, *args, **kwargs):
         return super(APIView, self).dispatch(request, *args, **kwargs)
 
-    def get(self, request):
-        # <view logic>
-        return HttpResponse('result')
-
-
     def post(self, request):
 
         form = SlackPOSTForm(data=request.POST)
