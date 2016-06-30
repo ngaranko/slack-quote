@@ -1,9 +1,0 @@
-syntax: glob
-
-.*
-*.pyc
-ENV
-static
-*.sqlite3
-db.sqlite3
-.sqlite3
