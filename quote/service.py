@@ -15,7 +15,7 @@ def search(keyword_string):
     for item in queries:
         query |= item
 
-    return Quote.objects.filter(query).order_by('-last_hit', '-author__last_hit').first()
+    return Quote.objects.filter(query).order_by('last_hit', 'author__last_hit').first()
 
 def hit(quote):
 
@@ -23,4 +23,4 @@ def hit(quote):
     Quote.objects.filter(pk=quote.pk).update(hit_count=F("hit_count") + 1, last_hit=timezone.now())
 
 def next():
-    return Quote.objects.order_by('-last_hit', '-author__last_hit').first()
+    return Quote.objects.order_by('last_hit', 'author__last_hit').first()
