@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 def in_channel_response(text=None, sub_text=None, image=None, path=None):
@@ -13,8 +14,8 @@ def in_channel_response(text=None, sub_text=None, image=None, path=None):
         attachment['text'] = sub_text
 
     if image:
-        attachment['image_url'] = settings.STATIC_URL + str(image)
-        attachment['thumb_url'] = settings.STATIC_URL + str(image)
+        attachment['image_url'] = path + str(image)
+        attachment['thumb_url'] = path + str(image)
 
     if attachment:
         response['attachments'] = [attachment]

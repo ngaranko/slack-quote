@@ -27,4 +27,7 @@ class APIView(View):
 
         quote_service.hit(quote=quote)
 
-        return JsonResponse(in_channel_response(text=str(quote),sub_text=quote.context, image=quote.image))
+        prefix = 'https://' if request.is_secure() else 'http://'
+        path = prefix + request.get_host() + '/'
+
+        return JsonResponse(in_channel_response(text=str(quote),sub_text=quote.context, image=quote.image, path=path))
