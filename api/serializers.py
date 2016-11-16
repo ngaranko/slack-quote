@@ -1,7 +1,3 @@
-from django.conf import settings
-from django.contrib.staticfiles.storage import staticfiles_storage
-
-
 def in_channel_response(text=None, sub_text=None, image=None, path=None):
     response = {
         'response_type':'in_channel',

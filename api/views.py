@@ -1,11 +1,11 @@
-from api.forms import SlackPOSTForm
-from api.serializers import in_channel_response
-from django.http import HttpResponse, JsonResponse
-
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import FormView, View
+from django.views.generic import View
 
 import quote.service as quote_service
+from api.forms import SlackPOSTForm
+from api.serializers import in_channel_response
+
 
 class APIView(View):
 
