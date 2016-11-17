@@ -1,7 +1,23 @@
+
+def buttons(buttons):
+    return {
+        "attachment_type": "default",
+        "actions": [
+            {
+                "name": button,
+                "text": button ,
+                "type": "button",
+                "value": button
+            } for button in buttons
+            ]
+    }
+
+
 def in_channel_response(text=None, sub_text=None, image=None, path=None):
     response = {
         'response_type': 'in_channel',
-        'text': text
+        'text': text,
+        'attachments': []
     }
 
     attachment = {}
@@ -19,6 +35,8 @@ def in_channel_response(text=None, sub_text=None, image=None, path=None):
             attachment['text'] = ' '
 
     if attachment:
-        response['attachments'] = [attachment]
+        response['attachments'].append(attachment)
+
+    response['attachments'].append(buttons(['Up vote', 'Down vote']))
 
     return response
