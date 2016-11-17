@@ -123,6 +123,6 @@ STATIC_ROOT = 'static/'
 APPEND_SLASH = False
 
 try:
-    import settings_local
+    from settings_local import *
 except ImportError:
     pass
