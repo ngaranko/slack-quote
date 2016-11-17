@@ -1,6 +1,6 @@
 def in_channel_response(text=None, sub_text=None, image=None, path=None):
     response = {
-        'response_type':'in_channel',
+        'response_type': 'in_channel',
         'text': text
     }
 

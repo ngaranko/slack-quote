@@ -1,5 +1,6 @@
 from django import forms
 
+
 class SlackPOSTForm(forms.Form):
 
     token_id = forms.CharField(max_length=255, required=False)
@@ -11,4 +12,3 @@ class SlackPOSTForm(forms.Form):
     command = forms.CharField(max_length=255)
     text = forms.CharField(max_length=255)
     response_url = forms.CharField(max_length=255)
-
