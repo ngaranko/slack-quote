@@ -4,4 +4,4 @@ ENV/
 *.idea/
 static/
 __pycache__/
-sq/settings_local.py
+settings.py
