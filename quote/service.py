@@ -18,10 +18,12 @@ def search(keyword_string):
 
     return Quote.objects.filter(query).order_by('last_hit', 'author__last_hit').first()
 
+
 def hit(quote):
 
     Author.objects.filter(pk=quote.author_id).update(hit_count=F("hit_count") + 1, last_hit=timezone.now())
     Quote.objects.filter(pk=quote.pk).update(hit_count=F("hit_count") + 1, last_hit=timezone.now())
+
 
 def next():
     return Quote.objects.order_by('last_hit', 'author__last_hit').first()

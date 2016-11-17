@@ -15,6 +15,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='quote',
             name='image',
-            field=models.FileField(blank=True, null=True, upload_to='', verbose_name=models.FileField(upload_to='uploads/')),
+            field=models.FileField(
+                blank=True,
+                null=True,
+                upload_to='',
+                verbose_name=models.FileField(upload_to='uploads/')
+            ),
         ),
     ]

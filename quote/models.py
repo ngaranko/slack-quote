@@ -14,6 +14,7 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+
 class Quote(models.Model):
     author = models.ForeignKey('quote.Author')
     active = models.BooleanField(default=True)
