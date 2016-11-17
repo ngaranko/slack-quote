@@ -14,7 +14,7 @@ def in_channel_response(text=None, sub_text=None, image=None, path=None):
         attachment['image_url'] = path + str(image)
         attachment['thumb_url'] = path + str(image)
 
-        if not attachment['text']:
+        if not attachment.get('text'):
             # If there is no attachment text, image does not get shown
             attachment['text'] = ' '
 
