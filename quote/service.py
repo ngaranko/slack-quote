@@ -6,10 +6,11 @@ from quote.models import Author, Quote
 
 def search(keyword_string):
 
-    keywords = keyword_string.split(' ')
+    keywords = [keyword for keyword in keyword_string.split(' ') if keyword]
 
-    queries = [Q(author__name__icontains=keyword) for keyword in keywords if keyword.strip()]
-    queries += [Q(text__icontains=keyword) for keyword in keywords if keyword.strip()]
+    queries = [Q(author__name__icontains=keyword) for keyword in keywords]
+    queries += [Q(text__icontains=keyword) for keyword in keywords]
+    queries += [Q(context__icontains=keyword) for keyword in keywords]
 
     query = queries.pop()
 
