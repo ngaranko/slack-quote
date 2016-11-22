@@ -37,6 +37,9 @@ def in_channel_response(text=None, sub_text=None, image=None, path=None):
     if attachment:
         response['attachments'].append(attachment)
 
-    response['attachments'].append(buttons(['Up vote', 'Down vote']))
+    # Does not work, temporary disabled due wrong implementation for Slack. Message after clicking button:
+    # Darn – that didn't work. Only Slack Apps can add interactive elements to messages.
+    # Manage your apps here: https://api.slack.com/apps/
+    # response['attachments'].append(buttons(['Up vote', 'Down vote']))
 
     return response
