@@ -1,6 +1,0 @@
-{
-  "name": "Slack-quote",
-  "tagline": "Simple slack slash command to return quotes",
-  "body": "### Project state\r\n[![Build Status](https://travis-ci.org/GerbenAaltink/slack-quote.svg?branch=master)](https://travis-ci.org/GerbenAaltink/slack-quote)\r\n\r\n### Screenshot\r\n![quote-bot](http://storage.gerbenaaltink.com/github/slack-quote/quote-bot.png)\r\n\r\n### Purpose \r\nEducational purposes, but this project is used in production for a company to host quotes made by employees. \r\n\r\n",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
