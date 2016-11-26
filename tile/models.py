@@ -1,0 +1,13 @@
+from django.conf import settings
+from django.db import models
+
+
+class Template(models.Model):
+    name = models.CharField(max_length=100)
+    line_height = models.PositiveIntegerField(default=20)
+    char_color = models.CharField(max_length=7, default='000000')
+    font = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
+    font_size = models.PositiveIntegerField(default=16)
+    padding_x = models.IntegerField(default=0)
+    padding_y = models.IntegerField(default=0)
+    image = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
