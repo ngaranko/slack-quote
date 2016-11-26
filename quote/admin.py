@@ -1,7 +1,9 @@
 from django.contrib import admin
 
+from tile.models import Template
 from .models import Author, Quote
 
+import tile.service
 
 class QuoteInlineAdmin(admin.TabularInline):
     model = Quote
@@ -25,6 +27,14 @@ class QuoteAdmin(admin.ModelAdmin):
 
     list_filter = ('author',)
 
-    pass
+    def save_model(self, request, obj, form, change):
 
-# Register your models here.
+        obj.save()
+
+        try:
+            template = Template.objects.get(is_default=True)
+        except (Template.MultipleObjectsReturned, Template.DoesNotExist):
+            pass
+        else:
+            tile.service.create(quote=obj, template=template)
+
