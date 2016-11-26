@@ -4,6 +4,7 @@ import io
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+from django.conf import settings
 from django.core.files.base import ContentFile
 
 
@@ -28,7 +29,7 @@ def create(quote, template):
 
     img = Image.open(template.image)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype(template.font, template.font_size)
+    font = ImageFont.truetype(settings.STATIC_ROOT + str(template.font), template.font_size)
     image_width, image_height = img.size
 
     char_width, char_height = draw.textsize("H", font)
