@@ -29,7 +29,7 @@ def create(quote, template):
 
     img = Image.open(template.image)
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype(settings.STATIC_ROOT + str(template.font), template.font_size)
+    font = ImageFont.truetype(str(template.font), template.font_size)
     image_width, image_height = img.size
 
     char_width, char_height = draw.textsize("H", font)
