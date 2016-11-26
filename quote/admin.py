@@ -21,7 +21,7 @@ class AuthorAdmin(admin.ModelAdmin):
 @admin.register(Quote)
 class QuoteAdmin(admin.ModelAdmin):
 
-    list_display = ('author', 'text', 'context', 'has_image', 'has_tile', 'hit_count', 'last_hit')
+    list_display = ('text', 'has_image', 'has_tile', 'hit_count', 'last_hit')
 
     list_filter = ('author',)
 
