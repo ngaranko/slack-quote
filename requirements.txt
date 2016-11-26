@@ -1,3 +1,4 @@
 django==1.10.3
+pillow==3.4.2
 gunicorn==19.6.0
 factory-boy==2.7.0
