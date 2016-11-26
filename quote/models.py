@@ -14,9 +14,12 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+    def quote_count(self):
+        return self.quotes.count()
+
 
 class Quote(models.Model):
-    author = models.ForeignKey('quote.Author')
+    author = models.ForeignKey('quote.Author', related_name='quotes')
     active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
@@ -31,3 +34,9 @@ class Quote(models.Model):
             return self.text
 
         return '{} - {}'.format(self.text, self.author.name)
+
+    def has_image(self):
+        return True if self.image else False
+
+    def has_tile(self):
+        return self.tile.exists()

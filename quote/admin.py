@@ -9,6 +9,9 @@ class QuoteInlineAdmin(admin.TabularInline):
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
+
+    list_display = ('name', 'active', 'created', 'quote_count', 'last_hit')
+
     inlines = [
         QuoteInlineAdmin
     ]
@@ -17,6 +20,11 @@ class AuthorAdmin(admin.ModelAdmin):
 
 @admin.register(Quote)
 class QuoteAdmin(admin.ModelAdmin):
+
+    list_display = ('author', 'text', 'context', 'has_image', 'has_tile', 'hit_count', 'last_hit')
+
+    list_filter = ('author',)
+
     pass
 
 # Register your models here.

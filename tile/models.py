@@ -11,3 +11,10 @@ class Template(models.Model):
     padding_x = models.IntegerField(default=0)
     padding_y = models.IntegerField(default=0)
     image = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
+
+
+class Tile(models.Model):
+    quote = models.ForeignKey('quote.Quote', related_name='tile')
+    template = models.ForeignKey('tile.Template')
+    created = models.DateTimeField(auto_now_add=True)
+    image = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
