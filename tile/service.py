@@ -55,7 +55,7 @@ def create(quote, template):
     output = io.BytesIO()
     img.save(output, format='JPEG')
 
-    tile = quote.tile.get_or_create(template=template)
+    tile, _ = quote.tile.get_or_create(template=template)
     tile.image.save('{}.jpg'.format(uuid.uuid4()), ContentFile(output.getvalue()))
 
     return tile

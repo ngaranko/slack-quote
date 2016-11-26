@@ -37,6 +37,13 @@ def in_channel_response(quote, path=None):
     if attachment:
         response['attachments'].append(attachment)
 
+    if quote.tile.exists():
+        response['attachments'].append({
+            'text': ' ',
+            'image_url': path + str(quote.tile.get().image),
+            'thumb_url': path + str(quote.tile.get().image)
+        })
+
     # Does not work, temporary disabled due wrong implementation for Slack. Message after clicking button:
     # Darn – that didn't work. Only Slack Apps can add interactive elements to messages.
     # Manage your apps here: https://api.slack.com/apps/
