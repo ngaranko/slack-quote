@@ -13,22 +13,22 @@ def buttons(buttons):
     }
 
 
-def in_channel_response(text=None, sub_text=None, image=None, path=None):
+def in_channel_response(quote, path=None):
     response = {
         'response_type': 'in_channel',
-        'text': text,
+        'text': quote.text,
         'attachments': []
     }
 
     attachment = {}
 
-    if sub_text:
-        attachment['text'] = sub_text
+    if quote.context:
+        attachment['text'] = quote.context
 
-    if image:
+    if quote.image:
 
-        attachment['image_url'] = path + str(image)
-        attachment['thumb_url'] = path + str(image)
+        attachment['image_url'] = path + str(quote.image)
+        attachment['thumb_url'] = path + str(quote.image)
 
         if not attachment.get('text'):
             # If there is no attachment text, image does not get shown
