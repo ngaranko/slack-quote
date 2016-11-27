@@ -12,5 +12,5 @@ class TileFactory(factory.DjangoModelFactory):
     class Meta:
         model = Tile
 
-    template = factory.RelatedFactory('tile.factories.TemplateFactory')
-    quote = factory.RelatedFactory('quote.factories.QuoteFactory')
+    template = factory.SubFactory('tile.factories.TemplateFactory')
+    quote = factory.SubFactory('quote.factories.QuoteFactory')

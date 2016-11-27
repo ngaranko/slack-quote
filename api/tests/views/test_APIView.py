@@ -131,7 +131,7 @@ class TestAPIView(TestCase):
 
         quote = QuoteFactory(image='image.jpg')
 
-        TileFactory(quote_id=quote.pk, template_id=TemplateFactory().pk, image='tile.jpg')
+        TileFactory(quote=quote, template=TemplateFactory(), image='tile.jpg')
 
         response = self.client.post('/api/', self.payload).json()
 
