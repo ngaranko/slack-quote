@@ -4,7 +4,7 @@ import io
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
-from django.conf import settings
+
 from django.core.files.base import ContentFile
 
 
