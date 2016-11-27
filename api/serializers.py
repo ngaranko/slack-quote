@@ -16,7 +16,7 @@ def buttons(buttons):
 def in_channel_response(quote, path=None):
     response = {
         'response_type': 'in_channel',
-        'text': quote.text,
+        'text': str(quote),
         'attachments': []
     }
 
