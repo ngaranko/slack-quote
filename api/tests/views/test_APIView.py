@@ -1,7 +1,7 @@
 from django.test import Client
 from django.test import TestCase
 
-from quote.factories import QuoteFactory
+from quote.factories import QuoteFactory, AuthorFactory
 from tile.factories import TileFactory, TemplateFactory
 
 
@@ -32,7 +32,7 @@ class TestAPIView(TestCase):
 
         self.assertDictEqual(response, {
             'response_type': 'in_channel',
-            'text': 'No quote in database',
+            'text': 'No quote in database - System message',
             'attachments': []
         })
 
@@ -78,7 +78,7 @@ class TestAPIView(TestCase):
 
         response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response['text'], quote.text)
+        self.assertEqual(response['text'], str(quote))
 
     def test_context(self):
 

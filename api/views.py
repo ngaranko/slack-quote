@@ -5,7 +5,7 @@ from django.views.generic import View
 import quote.service as quote_service
 from api.forms import SlackPOSTForm
 from api.serializers import in_channel_response
-from quote.models import Quote
+from quote.models import Quote, Author
 
 
 class APIView(View):
@@ -29,7 +29,7 @@ class APIView(View):
         if quote:
             quote_service.hit(quote=quote)
         else:
-            quote = Quote(text='No quote in database')
+            quote = Quote(text='No quote in database', author=Author(name='System message'))
 
         prefix = 'https://' if request.is_secure() else 'http://'
         path = prefix + request.get_host() + '/'
