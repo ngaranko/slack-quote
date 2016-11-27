@@ -5,6 +5,7 @@ from .models import Author, Quote
 
 import tile.service
 
+
 class QuoteInlineAdmin(admin.TabularInline):
     model = Quote
 
@@ -43,4 +44,3 @@ class QuoteAdmin(admin.ModelAdmin):
             pass
         else:
             tile.service.create(quote=obj, template=template)
-

@@ -5,11 +5,11 @@ def buttons(buttons):
         "actions": [
             {
                 "name": button,
-                "text": button ,
+                "text": button,
                 "type": "button",
                 "value": button
             } for button in buttons
-            ]
+        ]
     }
 
 
