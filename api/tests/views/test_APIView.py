@@ -28,10 +28,9 @@ class TestAPIView(TestCase):
         No quote available
         """
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(response.json(), {
+        self.assertDictEqual(response, {
             'response_type': 'in_channel',
             'text': 'No quote in database',
             'attachments': []
@@ -77,76 +76,53 @@ class TestAPIView(TestCase):
 
         quote = QuoteFactory(text='test')
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['text'], quote.text)
+        self.assertEqual(response['text'], quote.text)
 
     def test_context(self):
 
         quote = QuoteFactory(context='test')
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['attachments'][0]['text'], quote.context)
+        self.assertEqual(response['attachments'][0]['text'], quote.context)
 
     def test_image(self):
 
         quote = QuoteFactory(image='test.jpg')
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            response.json()['attachments'][0]['image_url'],
-            'http://testserver/{}'.format(quote.image)
-        )
-        self.assertEqual(
-            response.json()['attachments'][0]['thumb_url'],
-            'http://testserver/{}'.format(quote.image)
-        )
+        self.assertEqual(response['attachments'][0]['image_url'], 'http://testserver/{}'.format(quote.image))
+        self.assertEqual(response['attachments'][0]['thumb_url'], 'http://testserver/{}'.format(quote.image))
 
         # If quote has no context a space is sent as text. Slack will not show image otherwise
-        self.assertEqual(response.json()['attachments'][0]['text'], ' ')
+        self.assertEqual(response['attachments'][0]['text'], ' ')
 
     def test_image_with_context(self):
 
         quote = QuoteFactory(image='test.jpg', context='test')
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            response.json()['attachments'][0]['image_url'],
-            'http://testserver/{}'.format(quote.image)
-        )
-        self.assertEqual(
-            response.json()['attachments'][0]['thumb_url'],
-            'http://testserver/{}'.format(quote.image)
-        )
+        self.assertEqual(response['attachments'][0]['image_url'], 'http://testserver/{}'.format(quote.image))
+        self.assertEqual(response['attachments'][0]['thumb_url'], 'http://testserver/{}'.format(quote.image))
 
         # If quote has no context a space is sent as text. Slack will not show image otherwise
-        self.assertEqual(response.json()['attachments'][0]['text'], quote.context)
+        self.assertEqual(response['attachments'][0]['text'], quote.context)
 
     def test_tile(self):
 
         tile = TileFactory(quote_id=QuoteFactory().pk, template_id=TemplateFactory().pk, image='test.jpg')
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            response.json()['attachments'][0]['image_url'],
-            'http://testserver/{}'.format(tile.image)
-        )
-        self.assertEqual(
-            response.json()['attachments'][0]['thumb_url'],
-            'http://testserver/{}'.format(tile.image)
-        )
+        self.assertEqual(response['attachments'][0]['image_url'], 'http://testserver/{}'.format(tile.image))
+        self.assertEqual(response['attachments'][0]['thumb_url'], 'http://testserver/{}'.format(tile.image))
 
         # Is always a space
-        self.assertEqual(response.json()['attachments'][0]['text'], ' ')
+        self.assertEqual(response['attachments'][0]['text'], ' ')
 
     def test_tile_and_image(self):
         """
@@ -157,6 +133,6 @@ class TestAPIView(TestCase):
 
         TileFactory(quote_id=quote.pk, template_id=TemplateFactory().pk, image='tile.jpg')
 
-        response = self.client.post('/api/', self.payload)
+        response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(len(response.json()['attachments']), 2)
+        self.assertEqual(len(response['attachments']), 2)
