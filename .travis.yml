@@ -9,7 +9,6 @@ install:
   - pip install -r requirements.txt
   - pip install codecov
 script:
-  - python manage.py test --settings=sq.settings_test --parallel
-  - flake8 *.py */*.py --max-line-length=120 --exclude=sq/settings.py
+  - ./test.sh
 after_success:
   - codecov

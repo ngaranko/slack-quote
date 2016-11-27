@@ -1,8 +1,8 @@
-from .settings import *
+from sq.settings import *  # noqa: F403
 
 
 # Only available (and required) for tests, so inject it here.
-INSTALLED_APPS = list(INSTALLED_APPS)
+INSTALLED_APPS = list(INSTALLED_APPS)  # noqa: F405
 INSTALLED_APPS.append('django_nose')
 
 INTERNAL_IPS = None
