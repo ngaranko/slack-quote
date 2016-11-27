@@ -8,7 +8,6 @@ class TestAPIView(TestCase):
 
     def setUp(self):
 
-        self.quote = QuoteFactory()
         self.client = Client()
         self.payload = {
             'token': 'FKPUJkhcrVgK4jhppawRoEDR',
@@ -24,28 +23,33 @@ class TestAPIView(TestCase):
         }
 
     def test(self):
+        """
+        No quote available
+        """
 
         response = self.client.post('/api/', self.payload)
 
         self.assertEqual(response.status_code, 200)
-        self.assertDictEqual(response.json(), {'response_type': 'in_channel', 'text': '', 'attachments': []})
+        self.assertDictEqual(response.json(), {
+            'response_type': 'in_channel',
+            'text': 'No quote in database',
+            'attachments': []
+        })
 
     def test_text(self):
 
-        self.quote.text = 'test'
-        self.quote.save()
+        quote = QuoteFactory(text='test')
 
         response = self.client.post('/api/', self.payload)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['text'], self.quote.text)
+        self.assertEqual(response.json()['text'], quote.text)
 
     def test_context(self):
 
-        self.quote.context = 'test'
-        self.quote.save()
+        quote = QuoteFactory(context='test')
 
         response = self.client.post('/api/', self.payload)
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['attachments'][0]['text'], self.quote.context)
+        self.assertEqual(response.json()['attachments'][0]['text'], quote.context)
