@@ -5,3 +5,7 @@ ENV/
 static/
 __pycache__/
 settings.py
+/.project
+/.pydevproject
+/.coverage
+/coverage_report/html/

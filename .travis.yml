@@ -5,7 +5,10 @@ python:
   - "3.5-dev" # 3.5 development branch
   - "3.6-dev" # 3.6 development branch
   - "nightly" # 3.7-dev
-install: "pip install -r requirements.txt"
+install: 
+  - pip install -r requirements.txt
+  - pip install codecov
 script:
- - python manage.py test --parallel
- - flake8 *.py */*.py --max-line-length=120 --exclude=sq/settings.py
+  - ./test.sh
+after_success:
+  - codecov

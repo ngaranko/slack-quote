@@ -123,6 +123,6 @@ STATIC_ROOT = 'static/'
 APPEND_SLASH = False
 
 try:
-    from settings import *
+    from settings import *  # noqa: F401,F403,F405
 except ImportError:
     pass
