@@ -8,7 +8,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 
 
-def get_lines(text, char_limit):
+def _get_lines(text, char_limit):
     lines = []
     line = ""
 
@@ -38,7 +38,7 @@ def create(quote, template):
     char_limit = int(image_width / char_width - template.padding_x / char_width)
 
     # Convert long string in small lines
-    lines = get_lines(quote.text, char_limit)
+    lines = _get_lines(quote.text, char_limit)
 
     # Calculate text Y-position aligned by center
     padding_y = image_height * 0.5 - template.line_height * len(lines) * 0.5 + template.padding_y * 0.5
