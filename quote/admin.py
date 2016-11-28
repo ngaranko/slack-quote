@@ -30,12 +30,6 @@ class QuoteAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
 
-        # Force only one default template available
-        if not Quote.objects.filter(is_default=True).exists():
-            obj.is_default = True
-        elif obj.is_default:
-            Quote.objects.filter(is_default=True).update(is_default=False)
-
         obj.save()
 
         try:
