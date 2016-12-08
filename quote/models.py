@@ -24,16 +24,27 @@ class Quote(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     context = models.CharField(max_length=255, null=True, blank=True)
+    text_english = models.CharField(max_length=255, null=True, blank=True)
+    context_english = models.CharField(max_length=255, null=True, blank=True)
     hit_count = models.BigIntegerField(default=0, null=True, blank=True)
     last_hit = models.DateTimeField(null=True, blank=True)
     image = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
 
-    def __str__(self):
+    def get_text(self):
+        text = self.text_english or self.text
+        return '{} - {}'.format(text, self.author.name)
 
-        if self.author.name == 'debug':
-            return self.text
+    def get_context(self):
+        return self.context_english or self.context
 
-        return '{} - {}'.format(self.text, self.author.name)
+#    def __str__(self):
+#
+#        if self.author.name == 'debug':
+#            return self.text
+#
+#        return '{} - {}'.format(self.text, self.author.name)
+
+# Preserved for posterity, cleaning in later commit
 
     def has_image(self):
         return True if self.image else False
