@@ -16,14 +16,14 @@ def buttons(buttons):
 def in_channel_response(quote, path=None):
     response = {
         'response_type': 'in_channel',
-        'text': str(quote),
+        'text': str(quote.gettext()),
         'attachments': []
     }
 
     attachment = {}
 
     if quote.context:
-        attachment['text'] = quote.context
+        attachment['text'] = get_context()
 
     if quote.text_english:
         attachment['text'] = quote.text_english
