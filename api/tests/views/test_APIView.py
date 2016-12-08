@@ -78,7 +78,15 @@ class TestAPIView(TestCase):
 
         response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response['text'], quote.get_text())
+        self.assertEqual(response['text'], '{} - {}'.format(quote.text, quote.author.name))
+
+    def test_text_english(self):
+
+        quote = QuoteFactory(text='test', text_english='text-english')
+
+        response = self.client.post('/api/', self.payload).json()
+
+        self.assertEqual(response['text'], '{} - {}'.format(quote.text_english, quote.author.name))
 
     def test_context(self):
 
@@ -87,6 +95,14 @@ class TestAPIView(TestCase):
         response = self.client.post('/api/', self.payload).json()
 
         self.assertEqual(response['attachments'][0]['text'], quote.context)
+
+    def test_context_english(self):
+
+        quote = QuoteFactory(context='test', context_english='context-english')
+
+        response = self.client.post('/api/', self.payload).json()
+
+        self.assertEqual(response['attachments'][0]['text'], quote.context_english)
 
     def test_image(self):
 
