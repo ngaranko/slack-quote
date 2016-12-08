@@ -78,7 +78,7 @@ class TestAPIView(TestCase):
 
         response = self.client.post('/api/', self.payload).json()
 
-        self.assertEqual(response['text'], str(quote))
+        self.assertEqual(response['text'], quote.get_text())
 
     def test_context(self):
 
