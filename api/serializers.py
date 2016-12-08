@@ -25,11 +25,11 @@ def in_channel_response(quote, path=None):
     if quote.context:
         attachment['text'] = quote.context
 
-    if text_english:
-        attachment['text'] = quote.text_english.append(attachments)
+    if quote.text_english:
+        attachment['text'] = quote.text_english
 
-    if context_english:
-        attachment['text'] = quote.context_english.append(attachment)
+    if quote.context_english:
+        attachment['text'] = quote.context_english
 
 
     if quote.image:
