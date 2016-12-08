@@ -24,7 +24,7 @@ class Quote(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
     context = models.CharField(max_length=255, null=True, blank=True)
-    text_english = models.TextField(null=True)
+    text_english = models.CharField(max_length=255, null=True, blank=True)
     context_english = models.CharField(max_length=255, null=True, blank=True)
     hit_count = models.BigIntegerField(default=0, null=True, blank=True)
     last_hit = models.DateTimeField(null=True, blank=True)
