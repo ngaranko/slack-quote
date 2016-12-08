@@ -12,6 +12,7 @@ def buttons(buttons):
         ]
     }
 
+
 def in_channel_response(quote, path=None):
     response = {
         'response_type': 'in_channel',
@@ -40,7 +41,7 @@ def in_channel_response(quote, path=None):
 
     if attachment:
         response['attachments'].append(attachment)
-        
+
     if quote.tile.exists():
         response['attachments'].append({
             'text': ' ',
