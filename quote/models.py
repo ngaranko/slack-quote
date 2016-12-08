@@ -37,15 +37,6 @@ class Quote(models.Model):
     def get_context(self):
         return self.context_english or self.context
 
-#    def __str__(self):
-#
-#        if self.author.name == 'debug':
-#            return self.text
-#
-#        return '{} - {}'.format(self.text, self.author.name)
-
-# Preserved for posterity, cleaning in later commit
-
     def has_image(self):
         return True if self.image else False
 
