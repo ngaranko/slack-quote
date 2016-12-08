@@ -3,7 +3,6 @@ from django.db import models
 
 # Create your models here.
 
-
 class Author(models.Model):
     name = models.CharField(null=False, max_length=255)
     active = models.BooleanField(default=True)
@@ -32,10 +31,11 @@ class Quote(models.Model):
 
 def get_text(self):
     text = self.text_english or self.text
-     return '{} - {}'.format(text, self.author.name)
+    return '{} - {}'.format(text, self.author.name)
 
 def get_context(self):
     return self.context_english or self.context
+
 
 #    def __str__(self):
 #

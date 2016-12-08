@@ -12,7 +12,6 @@ def buttons(buttons):
         ]
     }
 
-
 def in_channel_response(quote, path=None):
     response = {
         'response_type': 'in_channel',
@@ -31,9 +30,7 @@ def in_channel_response(quote, path=None):
     if quote.context_english:
         attachment['text'] = quote.context_english
 
-
     if quote.image:
-
         attachment['image_url'] = path + str(quote.image)
         attachment['thumb_url'] = path + str(quote.image)
 
