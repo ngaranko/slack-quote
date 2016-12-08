@@ -10,7 +10,9 @@ def search(keyword_string):
 
     queries = [Q(author__name__icontains=keyword) for keyword in keywords]
     queries += [Q(text__icontains=keyword) for keyword in keywords]
+    queries += [Q(text_english__icontains=keyword) for keyword in keywords]
     queries += [Q(context__icontains=keyword) for keyword in keywords]
+    queries += [Q(context_english__icontains=keyword) for keyword in keywords]
 
     query = queries.pop()
 
