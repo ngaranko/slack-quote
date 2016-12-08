@@ -25,12 +25,6 @@ def in_channel_response(quote, path=None):
     if quote.get_context():
         attachment['text'] = quote.get_context()
 
-#    if quote.text_english:
-#        attachment['text'] = quote.text_english
-
-#    if quote.context_english:
-#        attachment['text'] = quote.context_english
-
     if quote.image:
         attachment['image_url'] = path + str(quote.image)
         attachment['thumb_url'] = path + str(quote.image)
