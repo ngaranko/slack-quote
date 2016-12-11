@@ -8,8 +8,8 @@ import tile.service
 
 
 class QuoteHasEnglishTranslationFilter(admin.SimpleListFilter):
-    title = 'English translation'
-    parameter_name = 'has_english_translation'
+    title = 'translated English'
+    parameter_name = 'translated_english'
 
     def lookups(self, request, model_admin):
         return (
