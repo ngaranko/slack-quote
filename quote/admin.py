@@ -8,7 +8,7 @@ import tile.service
 
 
 class QuoteHasEnglishTranslationFilter(admin.SimpleListFilter):
-    title = 'English translation available'
+    title = 'English translation'
     parameter_name = 'has_english_translation'
 
     def lookups(self, request, model_admin):
@@ -21,12 +21,12 @@ class QuoteHasEnglishTranslationFilter(admin.SimpleListFilter):
 
         if self.value() == 'Yes':
             return queryset.filter(
-                Q(text_english__isnull=True) | Q(context_english__isnull=True)
+                Q(text_english__isnull=False) | Q(context_english__isnull=False)
             )
 
         if self.value() == 'No':
             return queryset.filter(
-                Q(text_english__isnull=False) | Q(context_english__isnull=False)
+                Q(text_english__isnull=True) | Q(context_english__isnull=True)
             )
 
         return queryset
