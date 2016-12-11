@@ -53,7 +53,7 @@ class QuoteAdmin(admin.ModelAdmin):
 
     list_display = ('text', 'has_image', 'has_tile', 'hit_count', 'last_hit')
 
-    list_filter = ('author', 'active', QuoteHasEnglishTranslationFilter)
+    list_filter = ('active', QuoteHasEnglishTranslationFilter, 'author')
 
     def save_model(self, request, obj, form, change):
 
