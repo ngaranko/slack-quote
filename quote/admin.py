@@ -1,9 +1,35 @@
 from django.contrib import admin
+from django.db.models import Q
 
 from tile.models import Template
 from .models import Author, Quote
 
 import tile.service
+
+
+class QuoteHasEnglishTranslationFilter(admin.SimpleListFilter):
+    title = 'English translation available'
+    parameter_name = 'has_english_translation'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Yes', 'Yes'),
+            ('No', 'No')
+        )
+
+    def queryset(self, request, queryset):
+
+        if self.value() == 'Yes':
+            return queryset.filter(
+                Q(text_english__isnull=True) | Q(context_english__isnull=True)
+            )
+
+        if self.value() == 'No':
+            return queryset.filter(
+                Q(text_english__isnull=False) | Q(context_english__isnull=False)
+            )
+
+        return queryset
 
 
 class QuoteInlineAdmin(admin.TabularInline):
@@ -14,6 +40,7 @@ class QuoteInlineAdmin(admin.TabularInline):
 class AuthorAdmin(admin.ModelAdmin):
 
     list_display = ('name', 'active', 'created', 'quote_count', 'last_hit')
+    list_filter = ('active', )
 
     inlines = [
         QuoteInlineAdmin
@@ -26,7 +53,7 @@ class QuoteAdmin(admin.ModelAdmin):
 
     list_display = ('text', 'has_image', 'has_tile', 'hit_count', 'last_hit')
 
-    list_filter = ('author',)
+    list_filter = ('author', 'active', QuoteHasEnglishTranslationFilter)
 
     def save_model(self, request, obj, form, change):
 

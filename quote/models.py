@@ -38,7 +38,7 @@ class Quote(models.Model):
         return self.context_english or self.context
 
     def has_image(self):
-        return True if self.image else False
+        return bool(self.image)
 
     def has_tile(self):
         return self.tile.exists()
