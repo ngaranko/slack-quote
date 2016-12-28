@@ -150,7 +150,7 @@ class TestAPIView(TestCase):
 
     def test_tile_english_false(self):
 
-        tile = TileFactory(
+            tile = TileFactory(
             quote_id=QuoteFactory().pk,
             template_id=TemplateFactory().pk,
             image='test.jpg',

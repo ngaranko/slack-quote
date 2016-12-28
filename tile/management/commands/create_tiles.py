@@ -38,5 +38,7 @@ class Command(BaseCommand):
                 quote.tile.all().delete()
 
             tile_service.create(quote=quote, template=template, english=False)
-            tile_service.create(quote=quote, template=template, english=True)
             self.stdout.write('Created tile for quote {}'.format(quote.id))
+
+            tile_service.create(quote=quote, template=template, english=True)
+            self.stdout.write('Created translated tile for quote {}'.format(quote.id))
