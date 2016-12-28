@@ -12,3 +12,7 @@ class SlackPOSTForm(forms.Form):
     command = forms.CharField(max_length=255)
     text = forms.CharField(max_length=255)
     response_url = forms.CharField(max_length=255)
+    english = forms.BooleanField(required=False, initial=False)
+
+    def clean_english(self):
+        return '--english' in self.cleaned_data.get('text', '').split(' ')

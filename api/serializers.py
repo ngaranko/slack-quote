@@ -13,17 +13,17 @@ def buttons(buttons):
     }
 
 
-def in_channel_response(quote, path=None):
+def in_channel_response(quote, path=None, english=False):
     response = {
         'response_type': 'in_channel',
-        'text': quote.get_text(),
+        'text': quote.get_text(english=english),
         'attachments': []
     }
 
     attachment = {}
 
     if quote.get_context():
-        attachment['text'] = quote.get_context()
+        attachment['text'] = quote.get_context(english=english)
 
     if quote.image:
         attachment['image_url'] = path + str(quote.image)

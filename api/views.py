@@ -33,5 +33,6 @@ class APIView(View):
 
         prefix = 'https://' if request.is_secure() else 'http://'
         path = prefix + request.get_host() + '/'
+        english = form.cleaned_data.get('english')
 
-        return JsonResponse(in_channel_response(quote=quote, path=path))
+        return JsonResponse(in_channel_response(quote=quote, path=path, english=english))

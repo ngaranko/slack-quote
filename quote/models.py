@@ -30,12 +30,12 @@ class Quote(models.Model):
     last_hit = models.DateTimeField(null=True, blank=True)
     image = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
 
-    def get_text(self):
-        text = self.text_english or self.text
+    def get_text(self, english=False):
+        text = english and self.text_english or self.text
         return '{} - {}'.format(text, self.author.name)
 
-    def get_context(self):
-        return self.context_english or self.context
+    def get_context(self, english=False):
+        return english and self.context_english or self.context
 
     def has_image(self):
         return bool(self.image)

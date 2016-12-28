@@ -6,7 +6,7 @@ from quote.models import Author, Quote
 
 def search(keyword_string):
 
-    keywords = [keyword for keyword in keyword_string.split(' ') if keyword]
+    keywords = [keyword for keyword in keyword_string.split(' ') if keyword and not keyword.startswith('--')]
 
     queries = [Q(author__name__icontains=keyword) for keyword in keywords]
     queries += [Q(text__icontains=keyword) for keyword in keywords]

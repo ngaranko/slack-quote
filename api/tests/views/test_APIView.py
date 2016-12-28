@@ -84,6 +84,8 @@ class TestAPIView(TestCase):
 
         quote = QuoteFactory(text='test', text_english='text-english')
 
+        self.payload['text'] += ' --english'
+
         response = self.client.post('/api/', self.payload).json()
 
         self.assertEqual(response['text'], '{} - {}'.format(quote.text_english, quote.author.name))
@@ -99,6 +101,8 @@ class TestAPIView(TestCase):
     def test_context_english(self):
 
         quote = QuoteFactory(context='test', context_english='context-english')
+
+        self.payload['text'] += ' --english'
 
         response = self.client.post('/api/', self.payload).json()
 
