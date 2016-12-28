@@ -36,8 +36,6 @@ def in_channel_response(quote, path=None, english=False):
     if attachment:
         response['attachments'].append(attachment)
 
-    tiles = quote.tile.all()
-
     if quote.tile.filter(english=english).exists():
         response['attachments'].append({
             'text': ' ',
