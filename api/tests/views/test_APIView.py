@@ -134,7 +134,47 @@ class TestAPIView(TestCase):
 
     def test_tile(self):
 
-        tile = TileFactory(quote_id=QuoteFactory().pk, template_id=TemplateFactory().pk, image='test.jpg')
+        tile = TileFactory(
+            quote_id=QuoteFactory().pk,
+            template_id=TemplateFactory().pk,
+            image='test.jpg'
+        )
+
+        response = self.client.post('/api/', self.payload).json()
+
+        self.assertEqual(response['attachments'][0]['image_url'], 'http://testserver/{}'.format(tile.image))
+        self.assertEqual(response['attachments'][0]['thumb_url'], 'http://testserver/{}'.format(tile.image))
+
+        # Is always a space
+        self.assertEqual(response['attachments'][0]['text'], ' ')
+
+    def test_tile_english_false(self):
+
+        tile = TileFactory(
+            quote_id=QuoteFactory().pk,
+            template_id=TemplateFactory().pk,
+            image='test.jpg',
+            english=False
+        )
+
+        response = self.client.post('/api/', self.payload).json()
+
+        self.assertEqual(response['attachments'][0]['image_url'], 'http://testserver/{}'.format(tile.image))
+        self.assertEqual(response['attachments'][0]['thumb_url'], 'http://testserver/{}'.format(tile.image))
+
+        # Is always a space
+        self.assertEqual(response['attachments'][0]['text'], ' ')
+
+    def test_tile_english_true(self):
+
+        tile = TileFactory(
+            quote_id=QuoteFactory().pk,
+            template_id=TemplateFactory().pk,
+            image='test-english.jpg',
+            english=True
+        )
+
+        self.payload['text'] += ' --english'
 
         response = self.client.post('/api/', self.payload).json()
 
