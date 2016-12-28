@@ -37,5 +37,6 @@ class Command(BaseCommand):
             if quote.tile.exists():
                 quote.tile.all().delete()
 
-            tile_service.create(quote=quote, template=template)
+            tile_service.create(quote=quote, template=template, english=False)
+            tile_service.create(quote=quote, template=template, english=True)
             self.stdout.write('Created tile for quote {}'.format(quote.id))

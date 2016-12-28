@@ -36,11 +36,11 @@ def in_channel_response(quote, path=None, english=False):
     if attachment:
         response['attachments'].append(attachment)
 
-    if quote.tile.exists():
+    if quote.tile.filter(english=english).exists():
         response['attachments'].append({
             'text': ' ',
-            'image_url': path + str(quote.tile.get().image),
-            'thumb_url': path + str(quote.tile.get().image)
+            'image_url': path + str(quote.tile.get(english=english).image),
+            'thumb_url': path + str(quote.tile.get(english=english).image)
         })
 
     # Does not work, temporary disabled due wrong implementation for Slack. Message after clicking button:

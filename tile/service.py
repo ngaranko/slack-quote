@@ -25,7 +25,7 @@ def _get_lines(text, char_limit):
     return lines
 
 
-def create(quote, template):
+def create(quote, template, english):
 
     img = Image.open(template.image)
     draw = ImageDraw.Draw(img)
@@ -38,7 +38,7 @@ def create(quote, template):
     char_limit = int(image_width / char_width - template.padding_x / char_width)
 
     # Convert long string in small lines
-    lines = _get_lines(quote.get_text(), char_limit)
+    lines = _get_lines(quote.get_text(english=english), char_limit)
 
     # Calculate text Y-position aligned by center
     padding_y = image_height * 0.5 - template.line_height * len(lines) * 0.5 + template.padding_y * 0.5

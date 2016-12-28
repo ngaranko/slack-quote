@@ -19,3 +19,4 @@ class Tile(models.Model):
     template = models.ForeignKey('tile.Template')
     created = models.DateTimeField(auto_now_add=True)
     image = models.FileField(upload_to=settings.STATIC_ROOT + '/uploads/', null=True, blank=True)
+    english = models.BooleanField(default=False)

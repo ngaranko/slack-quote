@@ -63,4 +63,9 @@ class QuoteAdmin(admin.ModelAdmin):
         except (Template.MultipleObjectsReturned, Template.DoesNotExist):
             pass
         else:
-            tile.service.create(quote=obj, template=template)
+
+            # Generate tile in native language
+            tile.service.create(quote=obj, template=template, english=False)
+
+            # Generate tile in english translation
+            tile.service.create(quote=obj, template=template, english=True)
