@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
@@ -21,7 +22,7 @@ class APIView(View):
         quote = None
 
         if not form.is_valid():
-            return
+            return JsonResponse(data={}, status=400)
 
         cleaned_data = form.cleaned_data
 

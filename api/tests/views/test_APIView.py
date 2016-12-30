@@ -36,6 +36,19 @@ class TestAPIView(TestCase):
             'attachments': []
         })
 
+    def test_payload_invalid(self):
+        """
+        If payload is invalid, empty 400 response should be send
+        """
+
+        # Make payload invalid by removing important key
+        del self.payload['text']
+
+        response = self.client.post('/api/', self.payload)
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {})
+
     def test_hit_count(self):
         quote = QuoteFactory()
 
