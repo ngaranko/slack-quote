@@ -29,4 +29,8 @@ def hit(quote):
 
 
 def next():
-    return Quote.objects.order_by('last_hit', 'author__last_hit').first()
+    return Quote.objects.order_by('last_hit').first()
+
+
+def previous():
+    return Quote.objects.order_by('-last_hit').first()

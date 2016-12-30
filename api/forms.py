@@ -13,6 +13,13 @@ class SlackPOSTForm(forms.Form):
     text = forms.CharField(max_length=255)
     response_url = forms.CharField(max_length=255)
     english = forms.BooleanField(required=False, initial=False)
+    previous = forms.BooleanField(required=False, initial=False)
+
+    def _has_parameter(self, parameter_name):
+        return '--{}'.format(parameter_name) in self.cleaned_data.get('text', ' ')
 
     def clean_english(self):
-        return '--english' in self.cleaned_data.get('text', '').split(' ')
+        return self._has_parameter('english')
+
+    def clean_previous(self):
+        return self._has_parameter('previous')

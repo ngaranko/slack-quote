@@ -20,7 +20,15 @@ class APIView(View):
 
         quote = None
 
-        if form.is_valid():
+        if not form.is_valid():
+            return
+
+        cleaned_data = form.cleaned_data
+
+        if cleaned_data.get('previous'):
+            quote = quote_service.previous()
+
+        if not quote:
             quote = quote_service.search(form.cleaned_data['text'])
 
         if not quote:
@@ -33,6 +41,6 @@ class APIView(View):
 
         prefix = 'https://' if request.is_secure() else 'http://'
         path = prefix + request.get_host() + '/'
-        english = form.cleaned_data.get('english')
+        english = cleaned_data.get('english')
 
         return JsonResponse(in_channel_response(quote=quote, path=path, english=english))
