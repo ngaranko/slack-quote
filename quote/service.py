@@ -8,14 +8,14 @@ def search(keyword_string):
 
     keywords = [keyword for keyword in keyword_string.split(' ') if keyword and not keyword.startswith('--')]
 
+    if not keywords:
+        return next()
+
     queries = [Q(author__name__icontains=keyword) for keyword in keywords]
     queries += [Q(text__icontains=keyword) for keyword in keywords]
     queries += [Q(text_english__icontains=keyword) for keyword in keywords]
     queries += [Q(context__icontains=keyword) for keyword in keywords]
     queries += [Q(context_english__icontains=keyword) for keyword in keywords]
-
-    if not queries:
-        return next()
 
     query = queries.pop()
 
