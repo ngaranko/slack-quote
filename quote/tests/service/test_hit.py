@@ -5,7 +5,6 @@ import quote.service as quote_service
 from quote.factories import QuoteFactory
 
 
-
 class QuoteServiceHitTestCase(TestCase):
 
     def setUp(self):
