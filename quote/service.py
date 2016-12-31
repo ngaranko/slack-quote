@@ -9,7 +9,7 @@ def search(keyword_string):
     keywords = [keyword for keyword in keyword_string.split(' ') if keyword and not keyword.startswith('--')]
 
     if not keywords:
-        return next()
+        return
 
     queries = [Q(author__name__icontains=keyword) for keyword in keywords]
     queries += [Q(text__icontains=keyword) for keyword in keywords]
