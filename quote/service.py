@@ -14,6 +14,9 @@ def search(keyword_string):
     queries += [Q(context__icontains=keyword) for keyword in keywords]
     queries += [Q(context_english__icontains=keyword) for keyword in keywords]
 
+    if not queries:
+        return next()
+
     query = queries.pop()
 
     for item in queries:

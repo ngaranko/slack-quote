@@ -36,6 +36,14 @@ class TestAPIView(TestCase):
             'attachments': []
         })
 
+    def test_english_parameter(self):
+
+        self.payload.update(text='--english')
+
+        response = self.client.post('/api/', self.payload)
+
+        self.assertEqual(response.status_code, 200)
+
     def test_payload_invalid(self):
         """
         If payload is invalid, empty 400 response should be send
