@@ -50,7 +50,7 @@ class TestAPIView(TestCase):
         """
 
         # Make payload invalid by removing important key
-        del self.payload['text']
+        del self.payload['team_domain']
 
         response = self.client.post('/api/', self.payload)
 

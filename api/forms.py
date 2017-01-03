@@ -10,7 +10,7 @@ class SlackPOSTForm(forms.Form):
     channel_name = forms.CharField(max_length=255)
     user_id = forms.CharField(max_length=255)
     command = forms.CharField(max_length=255)
-    text = forms.CharField(max_length=255)
+    text = forms.CharField(max_length=255, required=False)
     response_url = forms.CharField(max_length=255)
     english = forms.BooleanField(required=False, initial=False)
     previous = forms.BooleanField(required=False, initial=False)
